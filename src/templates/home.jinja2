@@ -1,9 +1,22 @@
-{% extends "base.jinja2" %}
+{% extends "base.html" %}
 {% block content %}
-    <div class="jumbotron">
-        <h1>Pricing Service</h1>
-        <p>We scan online store websites to alert you of price drops in items that interest you.</p>
-        <p>Just sign up, and get started by adding the URL of an item that you wish to track. We'll do the rest!</p>
-        <p><a class="btn btn-primary btn-lg" href="{{ url_for('users.register_user') }}" role="button">Get started</a></p>
-    </div>
+{% if session["email"] %}
+<div class="jumbotron">
+  <h1>Pricing service</h1>
+  <p>Hello, {{ session["email"] }}!</p>
+    <p>Get started by adding the URL of an item that you wish to track.
+        We'll do the rest!</p>
+  <p><a class="btn btn-primary btn-lg" href="{{ url_for('users.user_alerts') }}"
+        role="button">Go to alerts</a></p>
+</div>
+{% else %}
+<div class="jumbotron">
+  <h1>Pricing service</h1>
+  <p>We scan online store websites to alert you of price drops in items you're interested in.</p>
+    <p>Just sign up, and get started by adding the URL of an item that you wish to track.
+        We'll do the rest!</p>
+  <p><a class="btn btn-primary btn-lg" href="{{ url_for('users.login_user') }}"
+        role="button">Sign up</a></p>
+</div>
+{% endif %}
 {% endblock %}
